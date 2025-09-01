@@ -13,7 +13,7 @@ describe('Transfer Controller', () => {
             const resposta = await request(app)
                 .post('/transfer')
                 .send({ // o send envia como se fosse o json
-                    from: "rodrigo",
+                    from: "alberto",
                     to: "aline",
                     amount: 100                    
                     });// Vou usa o supertest apontando para o app
@@ -23,5 +23,5 @@ describe('Transfer Controller', () => {
 
         });
     });
-
+    describe('GET ') 
 });
