@@ -46,7 +46,35 @@ describe('Transfer Controller', () => {
                 to.have.property('error', 'Usuário remetente ou destinatário não encontrado');
             // expect -> Espero a resposta
 
-            //Reset o Mock
+            //Reset o Mock 
+            sinon.restore();
+
+        });
+
+         it('Usando Mocks: Quando informo dados válidos eu recebo 201 CREATED', async () => {
+            // Mocar apenas a função transfer que quero mockar do Service
+            const transferServiceMock = sinon.stub(transferService,'transfer'); //Interceptamos
+            transferServiceMock.returns({
+                    from: "alberto",
+                    to: "aline",
+                    amount: 100,
+                    data:'transferência realizada com sucesso',
+                    date: new Date() }); //Dizemos a mensagem de erro
+
+            const resposta = await request(app)
+                .post('/transfer')
+                .send({ // o send envia como se fosse o json
+                    from: "alberto",
+                    to: "aline",
+                    amount: 100                    
+                    });// Vou usa o supertest apontando para o app
+
+            // expect -> Espero a resposta
+            expect(resposta.status).to.equals(201);
+            expect(resposta.body).to.have.property('from', 'alberto');
+            expect(resposta.body).to.have.property('data','transferência realizada com sucesso');
+            
+            //Reset o Mock 
             sinon.restore();
 
         });
