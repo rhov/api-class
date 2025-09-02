@@ -1,0 +1,26 @@
+name: Node.js CI # Nome do workflow
+
+on:
+  push:
+    branches: [ main] # Executa quando há push nessas branches
+  pull_request:
+    branches: [ main] # Executa quando há pull request nessas branches
+
+jobs:
+  build: # Nome do job
+    runs-on: ubuntu-latest # O job será executado em uma máquina virtual Ubuntu
+
+    steps:
+    - name: Checkout repository # Passo para clonar o repositório
+      uses: actions/checkout@v4
+
+    - name: Set up Node.js # Passo para instalar o Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '20' # Versão do Node.js utilizada
+
+    - name: Install dependencies # Instala as dependências do projeto
+      run: npm install
+
+    - name: Run tests # Executa os testes automatizados
+      run: npm test
