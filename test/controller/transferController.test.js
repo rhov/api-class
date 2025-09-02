@@ -6,6 +6,9 @@ const {expect} = require('chai');
 // Aplicação
 const app = require('../../app'); 
 
+// Mock
+const transferService = require('../../service/transferService');
+
 // Testes
 describe('Transfer Controller', () => {
     describe('POST /transfers', () => {
@@ -26,6 +29,10 @@ describe('Transfer Controller', () => {
         });
 
         it('Usando Mocks: Quando informo remetente e destinatário inexistente recebo 400', async () => {
+            // Mocar apenas a função transfer que quero mockar do Service
+            const transferServiceMock = sinon.stub(transferService,'transfer'); //Interceptamos
+            transferServiceMock.throws(new Error('Usuário remetente ou destinatário não encontrado')); //Dizemos a mensagem de erro
+
             const resposta = await request(app)
                 .post('/transfer')
                 .send({ // o send envia como se fosse o json
@@ -38,6 +45,9 @@ describe('Transfer Controller', () => {
             expect(resposta.body).
                 to.have.property('error', 'Usuário remetente ou destinatário não encontrado');
             // expect -> Espero a resposta
+
+            //Reset o Mock
+            sinon.restore();
 
         });
     });
