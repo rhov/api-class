@@ -32,4 +32,4 @@ jobs:
       run: sleep 5
 
     - name: Run api http test
-      run: npm rum test-external
+      run: npm rum test-external 
