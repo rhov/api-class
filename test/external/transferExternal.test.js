@@ -1,7 +1,7 @@
 //Bibliotecas
 const request = require('supertest'); // Iniciando o supetest
 const {expect} = require('chai');
-const apiUrl = 'http://localhost:3000';
+const {apiUrl} = require('../../config/config')
 
 // Testes
 describe('Transfer External', () => {
