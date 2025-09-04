@@ -10,6 +10,8 @@
   },
   "scripts": { 
     "test": "mocha 'test/**/*.test.js'",
+    "test-controller": "mocha 'test/controller/*.test.js'",
+    "test-external": "mocha 'test/external/*.test.js'",
     "start": "node server.js"
   }
 }
