@@ -1,13 +1,13 @@
 //Bibliotecas
 const request = require('supertest'); // Iniciando o supetest
 const {expect} = require('chai');
-const {apiUrl} = require('../../config/config')
+const { apiURL } = require('../../config/config')
 
 // Testes
 describe('Transfer External', () => {
     describe('POST /transfers', () => {
         it('Quando informo remetente e destinatário inexistente recebo 400', async () => {
-            const resposta = await request(apiUrl)
+            const resposta = await request(apiURL)
                 .post('/transfer')
                 .send({ // o send envia como se fosse o json
                     from: "alberto",
