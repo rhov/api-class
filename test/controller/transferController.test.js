@@ -51,7 +51,7 @@ describe('Transfer Controller', () => {
 
         });
 
-         it('Usando Mocks: Quando informo dados válidos eu recebo 201 CREATED', async () => {
+         it.only('Usando Mocks: Quando informo dados válidos eu recebo 201 CREATED', async () => {
             // Mocar apenas a função transfer que quero mockar do Service
             const transferServiceMock = sinon.stub(transferService,'transfer'); //Interceptamos
             transferServiceMock.returns({
@@ -74,6 +74,7 @@ describe('Transfer Controller', () => {
             expect(resposta.body).to.have.property('from', 'alberto');
             expect(resposta.body).to.have.property('data','transferência realizada com sucesso');
             
+            console.log(resposta.body);
             //Reset o Mock 
             sinon.restore();
 
