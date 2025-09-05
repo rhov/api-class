@@ -4,7 +4,8 @@ function registerUser({ username, password, favorecido }) {
   if (users.find(u => u.username === username)) {
     throw new Error('Usuário já existe');
   }
-  const user = { username, password, favorecido: !!favorecido };
+  // favorecido agora é um array de pessoas favorecidas
+  const user = { username, password, favorecido: Array.isArray(favorecido) ? favorecido : [] };
   users.push(user);
   return user;
 }
