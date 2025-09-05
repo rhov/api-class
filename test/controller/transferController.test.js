@@ -69,12 +69,19 @@ describe('Transfer Controller', () => {
                     amount: 100                    
                     });// Vou usa o supertest apontando para o app
 
-            // expect -> Espero a resposta
+            /* expect -> Espero a resposta
             expect(resposta.status).to.equals(201);
             expect(resposta.body).to.have.property('from', 'alberto');
             expect(resposta.body).to.have.property('data','transferência realizada com sucesso');
+            */
             
-            console.log(resposta.body);
+            //Validação com Fixture
+            const respostaEsperada = require('../fixture/respostas/quandoInformoDadosValidosEuRecebo201CREATED.json');
+            delete respostaEsperada.date;
+            delete resposta.body.date;
+
+            expect(resposta.body).to.deep.equal(respostaEsperada);
+
             //Reset o Mock 
             sinon.restore();
 
