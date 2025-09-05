@@ -27,7 +27,11 @@
                 "properties": {
                   "username": { "type": "string" },
                   "password": { "type": "string" },
-                  "favorecido": { "type": "boolean" }
+                  "favorecido": {
+                    "type": "array",
+                    "items": { "type": "string" },
+                    "description": "Lista de pessoas favorecidas"
+                  }
                 },
                 "required": ["username", "password"]
               }
