@@ -11,12 +11,18 @@ exports.register = (req, res) => {
   }
 };
 
+const jwt = require('jsonwebtoken');
+const { SECRET } = require('../middleware/authMiddleware');
+
 exports.login = (req, res) => {
   try {
     const { username, password } = req.body;
     if (!username || !password) return res.status(400).json({ error: 'Informe usuário e senha' });
     const user = userService.loginUser({ username, password });
-    res.json(user);
+    // Não incluir senha no token
+    const payload = { username: user.username };
+    const token = jwt.sign(payload, SECRET, { expiresIn: '1h' });
+    res.json({ token });
   } catch (err) {
     res.status(401).json({ error: err.message });
   }
