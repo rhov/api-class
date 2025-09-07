@@ -21,6 +21,7 @@ describe('Transfer Controller', () => {
         it('Quando informo remetente e destinatário inexistente recebo 400', async () => {
             const resposta = await request(app)
                 .post('/transfer')
+                .set('Authorization', `Bareer ${superToken}`)
                 .send({ // o send envia como se fosse o json
                     from: "alberto",
                     to: "aline",
@@ -41,6 +42,7 @@ describe('Transfer Controller', () => {
 
             const resposta = await request(app)
                 .post('/transfer')
+                .set('Authorization', `Bareer ${superToken}`)
                 .send({ // o send envia como se fosse o json
                     from: "alberto",
                     to: "aline",
@@ -57,7 +59,7 @@ describe('Transfer Controller', () => {
 
         });
 
-         it.only('Usando Mocks + Fixture: Quando informo dados válidos eu recebo 201 CREATED', async () => {
+         it('Usando Mocks + Fixture: Quando informo dados válidos eu recebo 201 CREATED', async () => {
             // Mocar apenas a função transfer que quero mockar do Service
             const transferServiceMock = sinon.stub(transferService,'transfer'); //Interceptamos
             transferServiceMock.returns({
@@ -95,9 +97,11 @@ describe('Transfer Controller', () => {
         });
     });
     describe('GET /transfers', () => {
-        it('Quando busco um GET retorno 200', async () =>{
+        it.only('Quando busco um GET retorno 200', async () =>{
+           
             const resposta = await request(app)
-                .get('/transfers');
+                .get('/transfers')
+                .set('Authorization', `Bareer ${superToken}`);
             expect(resposta.status).to.equals(200);
         });
     });
