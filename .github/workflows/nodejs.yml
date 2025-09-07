@@ -25,12 +25,6 @@ jobs:
     - name: Run tests controller # Executa os testes automatizados de controller 
       run: npm run test-controller
 
-    - name: Upload report test-controller
-      uses: actions/upload-artifact@v4
-      with:
-        name: mochawesome-report test-controller
-        path: mochawesome-report-test-controller/
-
     - name: Start Api # Inicia a API
       run: npm start &
     
@@ -40,12 +34,6 @@ jobs:
 
     - name: Run tests external #Realiza testes externos ou seja com API oN
       run: npm rum test-external 
-
-    - name: Upload report test-external
-      uses: actions/upload-artifact@v4
-      with:
-        name: mochawesome-report test-external
-        path: mochawesome-report-test-external/
 
     - name: Run ALL tests  #Realiza testes externos ou seja com API oN
       run: npm test
