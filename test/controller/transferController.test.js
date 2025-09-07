@@ -12,12 +12,13 @@ const app = require('../../app');
 // Mock
 const transferService = require('../../service/transferService');
 
+    //pré-condição
+    before(async () => { superToken = await getToken() });
 
 
 // Testes
 describe('Transfer Controller', () => {
-    //pré-condição
-    before(async () => { superToken = await getToken() });
+
     describe('POST /transfers', () => {
         it('Quando informo remetente e destinatário inexistente recebo 400', async () => {
             const resposta = await request(app)
@@ -99,7 +100,7 @@ describe('Transfer Controller', () => {
         });
     });
     describe('GET /transfers', () => {
-        it.only('Quando busco um GET retorno 200', async () => {
+        it('Quando busco um GET retorno 200', async () => {
 
             const resposta = await request(app)
                 .get('/transfers')
