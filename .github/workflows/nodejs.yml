@@ -37,7 +37,7 @@ jobs:
       run: npm rum test-external 
 
     - name: Upload report
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v5
       with:
         name: mochawesome-report
         path: mochawesome-report/
