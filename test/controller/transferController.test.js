@@ -2,12 +2,18 @@
 const request = require('supertest'); // Iniciando o supetest
 const sinon = require('sinon'); //Iniciando o sinon
 const {expect} = require('chai');
+const { getToken } = require('../factory/superToken');
+let superToken;
+
 
 // Aplicação
 const app = require('../../app'); 
 
 // Mock
 const transferService = require('../../service/transferService');
+
+//pré-condição
+before(async () => {superToken = await getToken()});
 
 // Testes
 describe('Transfer Controller', () => {
@@ -51,7 +57,7 @@ describe('Transfer Controller', () => {
 
         });
 
-         it.only('Usando Mocks: Quando informo dados válidos eu recebo 201 CREATED', async () => {
+         it.only('Usando Mocks + Fixture: Quando informo dados válidos eu recebo 201 CREATED', async () => {
             // Mocar apenas a função transfer que quero mockar do Service
             const transferServiceMock = sinon.stub(transferService,'transfer'); //Interceptamos
             transferServiceMock.returns({
@@ -63,6 +69,7 @@ describe('Transfer Controller', () => {
 
             const resposta = await request(app)
                 .post('/transfer')
+                .set('Authorization', `Bareer ${superToken}`)
                 .send({ // o send envia como se fosse o json
                     from: "alberto",
                     to: "aline",
