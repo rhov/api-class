@@ -22,14 +22,14 @@ jobs:
     - name: Install dependencies # Instala as dependências do projeto
       run: npm install
 
-    - name: Run tests controller # Executa os testes automatizados
-      run: npm run test-controller
-
     - name: Start Api # Executa os testes automatizados
       run: npm start &
     
     - name: Wait api
       run: sleep 5
+
+    - name: Run tests controller # Executa os testes automatizados
+      run: npm run test-controller
 
     - name: Run api http test
       run: npm rum test-external 
