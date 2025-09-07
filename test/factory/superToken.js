@@ -1,6 +1,6 @@
 //Bibliotecas
 const request = require('supertest');
-const { apiURL } = require('../../config/config')
+const { apiURL } = require('../config/config')
 
 
 async function getToken(username = "rodrigo", password = "123456") {

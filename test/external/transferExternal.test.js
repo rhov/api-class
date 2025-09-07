@@ -1,13 +1,13 @@
 //Bibliotecas
 const request = require('supertest'); // Iniciando o supetest
 const { expect } = require('chai');
-const { apiURL } = require('../../config/config');
+const { apiURL } = require('../config/config');
 const { getToken } = require('../factory/superToken');
 let superToken;
 
 //pré-condição
 before(async () => {superToken = await getToken()});
-
+ 
 // Testes
 describe('Transfer External', () => {
     describe('POST /transfers', () => {
