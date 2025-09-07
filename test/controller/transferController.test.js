@@ -11,15 +11,14 @@ const app = require('../../app');
 
 // Mock
 const transferService = require('../../service/transferService');
-
-
-
+//pré-condição
+// before(async () => { superToken = await getToken(false); });
+before(async () => { superToken = await getToken("apioff") });
 
 // Testes
 describe('Transfer Controller', () => {
     describe('POST /transfers', () => {
-        //pré-condição
-        before(async () => { superToken = await getToken() });
+
         it('Quando informo remetente e destinatário inexistente recebo 400', async () => {
             const resposta = await request(app)
                 .post('/transfer')

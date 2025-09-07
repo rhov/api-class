@@ -1,15 +1,31 @@
 //Bibliotecas
 const request = require('supertest');
-const { apiURL } = require('../config/config')
+const { apiURL, userLogin } = require('../config/config');
+const app = require('../../app');
 
 
-async function getToken(username = "rodrigo", password = "123456") {
-    const login = await request(apiURL)
-        .post('/login')
-        .send({
-            username: username,
-            password: password
-        });
+async function getToken(apiStart) {
+
+    let api;
+    const apiStartLower = typeof apiStart === 'string' ? apiStart.toLowerCase() : apiStart;
+    if (apiStartLower === undefined || apiStartLower === 'apion') {
+        api = apiURL;
+    } else if (apiStartLower === 'apioff') {
+        api = app;
+    } else {
+        throw new Error('API não encontrada: use "apion" ou "apiOff"');
+    }
+
+
+
+    let login;
+    try {
+        login = await request(api)
+            .post('/login')
+            .send({ username: userLogin.username, password: userLogin.password });
+    } catch (err) {
+        throw new Error(`Não foi possível conectar ao servidor. Verifique se a API ${apiURL} está online. Params: apiStart:${apiStart}`);
+    }
 
     if (login.status != 200) {
         throw new Error(`Login falhou: ${login.status} - ${login.body.error}`);
@@ -18,4 +34,4 @@ async function getToken(username = "rodrigo", password = "123456") {
     return login.body.token;
 }
 
-module.exports = {getToken};
+module.exports = { getToken };
