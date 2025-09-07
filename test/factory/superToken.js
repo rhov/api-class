@@ -14,6 +14,7 @@ async function getToken(username = "rodrigo", password = "123456") {
     if (login.status != 200) {
         throw new Error(`Login falhou: ${login.status} - ${login.body.error}`);
     }
+    console.log(login.body.token);
     return login.body.token;
 }
 
