@@ -23,7 +23,7 @@ describe('Transfer Controller', () => {
         it('Quando informo remetente e destinatário inexistente recebo 400', async () => {
             const resposta = await request(app)
                 .post('/transfer')
-                .set('Authorization', `Bareer ${superToken}`)
+                .set('Authorization', `Bearer ${superToken}`)
                 .send({ // o send envia como se fosse o json
                     from: "alberto",
                     to: "aline",
@@ -44,7 +44,7 @@ describe('Transfer Controller', () => {
 
             const resposta = await request(app)
                 .post('/transfer')
-                .set('Authorization', `Bareer ${superToken}`)
+                .set('Authorization', `Bearer ${superToken}`)
                 .send({ // o send envia como se fosse o json
                     from: "alberto",
                     to: "aline",
@@ -74,7 +74,7 @@ describe('Transfer Controller', () => {
 
             const resposta = await request(app)
                 .post('/transfer')
-                .set('Authorization', `Bareer ${superToken}`)
+                .set('Authorization', `Bearer ${superToken}`)
                 .send({ // o send envia como se fosse o json
                     from: "alberto",
                     to: "aline",
@@ -104,7 +104,7 @@ describe('Transfer Controller', () => {
 
             const resposta = await request(app)
                 .get('/transfers')
-                .set('Authorization', `Bareer ${superToken}`);
+                .set('Authorization', `Bearer ${superToken}`);
             expect(resposta.status).to.equals(200);
         });
     });
