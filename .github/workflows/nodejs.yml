@@ -41,10 +41,10 @@ jobs:
     - name: Run tests external #Realiza testes externos ou seja com API oN
       run: npm rum test-external 
 
-    - name: Upload report tests
+    - name: Upload report tests external
       uses: actions/upload-artifact@v4
       with:
-        name: mochawesome-report tests
+        name: mochawesome-report tests external
         path: mochawesome-report/
 
     - name: Run ALL tests  #Realiza testes externos ou seja com API oN
