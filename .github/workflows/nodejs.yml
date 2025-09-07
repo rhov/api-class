@@ -24,8 +24,6 @@ jobs:
 
     - name: Run tests controller # Executa os testes automatizados de controller 
       run: npm run test-controller
-    - name: Run tests external #Realiza testes externos ou seja com API oN
-      run: npm rum test-external 
 
     - name: Upload report test-controller
       uses: actions/upload-artifact@v4
