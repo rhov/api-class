@@ -2,7 +2,7 @@
 const request = require('supertest'); // Iniciando o supetest
 const { expect } = require('chai');
 const { apiURL } = require('../config/config');
-const { getToken } = require('../../factory/superToken');
+const { getToken } = require('../factory/superToken');
 let superToken;
 
 //pré-condição
@@ -15,7 +15,7 @@ describe('Transfer External', () => {
          
             const resposta = await request(apiURL)
                 .post('/transfer')
-                .set('Authorization', `Bareer ${superToken}`)
+                .set('Authorization', `Bearer ${superToken}`)
                 .send({ // o send envia como se fosse o json
                     from: "aline",
                     to: "sheldon",
