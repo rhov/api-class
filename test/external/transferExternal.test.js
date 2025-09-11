@@ -15,7 +15,7 @@ describe('Transfer External', () => {
          
             const resposta = await request(apiURL)
                 .post('/transfer')
-                .set('Authorization', `Bareer ${superToken}`)
+                .set('Authorization', `Bearer ${superToken}`)
                 .send({ // o send envia como se fosse o json
                     from: "aline",
                     to: "sheldon",

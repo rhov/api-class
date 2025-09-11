@@ -1,7 +1,7 @@
 const express = require('express');
 const userController = require('./controller/userController');
 const transferController = require('./controller/transferController');
-const { authenticateToken } = require('./middleware/authMiddleware');
+const { authMiddlewareREST } = require('./middleware/authMiddleware');
 const swaggerUi = require('swagger-ui-express');
 const swaggerDocument = require('./swagger.json');
 
@@ -14,8 +14,8 @@ app.post('/login', userController.login);
 app.get('/users', userController.getUsers);
 
 // Transfer routes (protegidas por JWT)
-app.post('/transfer', authenticateToken, transferController.transfer);
-app.get('/transfers', authenticateToken, transferController.getTransfers);
+app.post('/transfer', authMiddlewareREST, transferController.transfer);
+app.get('/transfers', authMiddlewareREST, transferController.getTransfers);
 
 // Swagger docs
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
