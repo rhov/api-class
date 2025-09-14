@@ -51,7 +51,7 @@ describe('Transfers External GraphQL', () => {
                 }
 
             })
-        console.log(respostaTransf.body);
+        expect(respostaTransf.status).to.equals(200);
     })
 
 
