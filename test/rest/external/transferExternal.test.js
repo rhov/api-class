@@ -18,14 +18,15 @@ describe('Transfer External', () => {
                 .set('Authorization', `Bearer ${superToken}`)
                 .send({ // o send envia como se fosse o json
                     from: "aline",
-                    to: "sheldon",
+                    to: "batman",
                     amount: 100
                 });// Vou usa o supertest apontando para o app
 
             expect(resposta.status).to.equals(400);
             expect(resposta.body).
-                to.have.property('error', 'Usuário remetente ou destinatário não encontrado');
+                to.have.property('error', 'Usuário remetente ou destinatário não encontrado.');
             // expect -> Espero a resposta
+
 
         });
     });

@@ -31,15 +31,15 @@ describe('Transfer Controller', () => {
 
             expect(resposta.status).to.equals(400);
             expect(resposta.body).
-                to.have.property('error', 'Usuário remetente ou destinatário não encontrado');
-            // expect -> Espero a resposta
+                to.have.property('error', 'Usuário remetente ou destinatário não encontrado.');
+
 
         });
 
         it('Usando Mocks: Quando informo remetente e destinatário inexistente recebo 400', async () => {
             // Mocar apenas a função transfer que quero mockar do Service
             const transferServiceMock = sinon.stub(transferService, 'transfer'); //Interceptamos
-            transferServiceMock.throws(new Error('Usuário remetente ou destinatário não encontrado')); //Dizemos a mensagem de erro
+            transferServiceMock.throws(new Error('Usuário remetente ou destinatário não encontrado.')); //Dizemos a mensagem de erro
 
             const resposta = await request(app)
                 .post('/transfer')
@@ -52,7 +52,7 @@ describe('Transfer Controller', () => {
 
             expect(resposta.status).to.equals(400);
             expect(resposta.body).
-                to.have.property('error', 'Usuário remetente ou destinatário não encontrado');
+                to.have.property('error', 'Usuário remetente ou destinatário não encontrado.');
             // expect -> Espero a resposta
 
             //Reset o Mock 

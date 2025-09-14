@@ -1,60 +1,29 @@
 const request = require('supertest');
 const { expect } = require('chai');
-const { apiURLGraphql,userLogin } = require('../../config/config');
-let token;
+const { apiURLGraphql, userLogin } = require('../../config/config');
+const { getToken } = require('../factory/requisições/login/loginUser')
+let token, mutation = require('../fixture/requisições/transfers/body.json');
 
-beforeEach (async() =>{
-    const resposta = await request(apiURLGraphql)
-            .post('')
-            .send({
-                query: `
-                    mutation Login($username: String!, $password: String!) {
-                        login(username: $username, password: $password) {
-                            token
-                        }
-                    }
-                `,
-                variables: {
-                    username: userLogin[1].username,
-                    password: userLogin[1].password
-                }
+beforeEach(async () => {
+    token = await getToken();
+})
 
-            })
-        token = resposta.body.data.login.token;
-}) 
 
 describe('Transfers External GraphQL', () => {
     it('Realizar Transferência com token obtido dinâmicamente', async () => {
 
-     
-    const respostaTransf = await request(apiURLGraphql)
+
+        const respostaTransf = await request(apiURLGraphql)
             .post('')
             .set('Authorization', `Bearer ${token}`)
-            .send({
-                query: `
-                    mutation Mutation($from: String!, $to: String!, $amount: Float!) {
-                        transfer(from: $from, to: $to, amount: $amount) {
-                            from
-                            to
-                            amount
-                            
-                        }
-                    }
-                `,
-                variables: {
-                    from: "rodrigo",
-                    to: "aline",
-                    amount: 1000
-                }
-
-            })
+            .send(mutation);
         expect(respostaTransf.status).to.equals(200);
     })
 
-     it('Transferência com saldo insuficiente', async () => {
-   
-     
-    const respostaTransf = await request(apiURLGraphql)
+    it('Transferência com saldo insuficiente', async () => {
+
+
+        const respostaTransf = await request(apiURLGraphql)
             .post('')
             .set('Authorization', `Bearer ${token}`)
             .send({
@@ -75,14 +44,14 @@ describe('Transfers External GraphQL', () => {
                 }
 
             })
-        
+
         expect(respostaTransf.body.errors[0].message).to.equals("Saldo insuficiente para realizar a transferência.");
     })
 
 
- it('Transferência para não favorefcido acima de 5k', async () => {
-   
-    const respostaTransf = await request(apiURLGraphql)
+    it('Transferência para não favorefcido acima de 5k', async () => {
+
+        const respostaTransf = await request(apiURLGraphql)
             .post('')
             .set('Authorization', `Bearer ${token}`)
             .send({
@@ -103,7 +72,7 @@ describe('Transfers External GraphQL', () => {
                 }
 
             })
-        
+
         expect(respostaTransf.body.errors[0].message).to.equals("Transferências acima de R$ 5.000,00 só podem ser feitas para favorecidos do remetente.");
     })
 
