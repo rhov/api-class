@@ -1,5 +1,8 @@
 const request = require('supertest');
-const { expect } = require('chai');
+const chai = require('chai');
+const chaiExclude = require('chai-exclude');
+chai.use(chaiExclude);
+const { expect } = chai;
 const { apiURLGraphql } = require('../../config/config');
 const { getToken } = require('../factory/requisições/login/loginUser')
 const objetoCreate = require('../fixture/requisições/transfers/createTransfer.json');
@@ -11,12 +14,16 @@ describe('Transfers External GraphQL', () => {
 
     })
 
-    it('Realizar Transferência com token obtido dinâmicamente', async () => {
+    it.only('Realizar Transferência válida', async () => {
+        const respostaEsperada = require('../fixture/respostas/realizarTransfereciaValida.json');
         const respostaTransf = await request(apiURLGraphql)
             .post('')
             .set('Authorization', `Bearer ${token}`)
             .send(createTransferMutation);
-        expect(respostaTransf.status).to.equals(200);
+
+        expect(respostaTransf.body.data.transfer)
+            .excluding('date')
+            .to.deep.equal(respostaEsperada.body.data.transfer);
     })
 
     it('Transferência com saldo insuficiente', async () => {
