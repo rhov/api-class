@@ -21,6 +21,7 @@
     "test": "mocha 'test/rest/**/*.test.js' --timeout 10000 --reporter mochawesome",
     "test-controller": "mocha 'test/rest/controller/*.test.js' --timeout 10000 --reporter mochawesome",
     "test-external": "mocha 'test/rest/external/*.test.js' --timeout 10000 --reporter mochawesome",
-    "test-g": "mocha 'test/graphql/**/*.test.js' --timeout 10000 --reporter mochawesome"
+    "test-g": "mocha 'test/graphql/**/*.test.js' --timeout 10000 --reporter mochawesome",
+    "test-query": "mocha 'test/graphql/resolver/query.test.js' --timeout 10000 --reporter mochawesome"
   }
 }
