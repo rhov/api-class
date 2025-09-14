@@ -7,10 +7,10 @@ let superToken;
 
 
 // Aplicação
-const app = require('../../app');
+const app = require('../../../app');
 
 // Mock
-const transferService = require('../../service/transferService');
+const transferService = require('../../../service/transferService');
 //pré-condição
 // before(async () => { superToken = await getToken(false); });
 before(async () => { superToken = await getToken("apioff") });

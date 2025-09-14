@@ -1,7 +1,7 @@
 //Bibliotecas
 const request = require('supertest');
 const { apiURL, userLogin } = require('../config/config');
-const app = require('../../app');
+const app = require('../../../app');
 
 
 async function getToken(apiStart) {
