@@ -16,11 +16,9 @@ const server = new ApolloServer({
   context: ({ req }) => ({ user: req.user })
 });
 
-async function startApolloServer() {
+// Exporta uma Promise que resolve o app pronto
+module.exports = (async () => {
   await server.start();
   server.applyMiddleware({ app });
-}
-
-startApolloServer();
-
-module.exports = app;
+  return app;
+})();

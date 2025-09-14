@@ -2,6 +2,13 @@
 const request = require('supertest');
 const { apiURL, userLogin,apiURLGraphQL, ul } = require('../config/config');
 const app = require('../../../app');
+const appGraphQL = require ('../../../graphql/app');
+
+
+
+// ...existing code...
+// exports.getTokenGraphQL = async function(apiStart) { ... }
+
 
 async function getToken(apiStart) {
 
@@ -43,18 +50,16 @@ async function getTokenGraphQL(apiStart) {
     if (apiStartLower === undefined || apiStartLower === 'apion') {
         api = apiURLGraphQL;
     } else if (apiStartLower === 'apioff') {
-        api = app;
+        api = appGraphQL;
     } else {
         throw new Error('API não encontrada: use "apion" ou "apiOff"');
     }
-
-
 
     let login;
     try {
         login = await request(api)
             .post('')
-          .send({
+            .send({
                 query: `
                     mutation Login($username: String!, $password: String!) {
                         login(username: $username, password: $password) {
@@ -63,20 +68,19 @@ async function getTokenGraphQL(apiStart) {
                     }
                 `,
                 variables: {
-                    username: ul.username,
-                    password: ul.password
+                    username: 'rodrigo',
+                    password: '123456'
                 }
-
-            })
-        console.log(resposta.body.data.login.token);
+            });
+       
     } catch (err) {
-        throw new Error(`Não foi possível conectar ao servidor. Verifique se a API ${apiURLGraphQL} está online. Params: apiStart:${apiStart}`);
+          throw new Error(`Não foi possível conectar ao servidor. Verifique se a API ${apiURLGraphQL} está online. Params: apiStart:${apiStart}`);
     }
 
     if (login.status != 200) {
         throw new Error(`Login falhou: ${login.status} - ${login.body.error}`);
     }
 
-    return login.body.token;
+    return login.body.data?.login?.token;
 }
 module.exports = { getToken,getTokenGraphQL };

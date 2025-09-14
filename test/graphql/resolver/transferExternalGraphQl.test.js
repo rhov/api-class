@@ -3,11 +3,14 @@ const { expect } = require('chai');
 // const app = require('../../../graphql/app');
 const apiURL = "http://localhost:4000/graphql";
 const {getTokenGraphQL} = require ('../../rest/factory/superToken');
+let superToken;
 
-before(async () => { superToken = await getToken("apioff") });
+before(async () => { superToken = await getTokenGraphQL("apioff") 
+    console.log(superToken);
+});
 
 describe('Transfers External GraphQL', () => {
-    it('Obter Token', async () => {
+    it.only('Obter Token', async () => {
         const resposta = await request(apiURL)
             .post('')
             .send({
@@ -27,7 +30,6 @@ describe('Transfers External GraphQL', () => {
         //console.log(resposta.body.data.login.token);
     })
 
-    console.log.
-
+ 
 })
 
