@@ -13,15 +13,19 @@
     "swagger-ui-express": "^5.0.1"
   },
   "devDependencies": {
-    "mochawesome": "^7.1.3"
+    "mochawesome": "^7.1.3",
+    "nodemon": "^3.1.10"
   },
   "scripts": {
     "start": "node server.js",
     "start-g": "node graphql/server.js",
-    "test": "mocha 'test/rest/**/*.test.js' --timeout 10000 --reporter mochawesome",
-    "test-controller": "mocha 'test/rest/controller/*.test.js' --timeout 10000 --reporter mochawesome",
-    "test-external": "mocha 'test/rest/external/*.test.js' --timeout 10000 --reporter mochawesome",
-    "test-g": "mocha 'test/graphql/**/*.test.js' --timeout 10000 --reporter mochawesome",
-    "test-query": "mocha 'test/graphql/resolver/query.test.js' --timeout 10000 --reporter mochawesome"
+    "dev": "nodemon server.js",
+    "dev-g": "nodemon graphql/server.js",
+  "test": "mocha 'test/rest/**/*.test.js' --timeout 10000 --reporter mochawesome",
+  "test-controller": "mocha 'test/rest/controller/*.test.js' --timeout 10000 --reporter mochawesome",
+  "test-external": "mocha 'test/rest/external/*.test.js' --timeout 10000 --reporter mochawesome",
+  "test-g": "mocha 'test/graphql/**/*.test.js' --timeout 10000 --reporter mochawesome",
+  "test-query": "mocha 'test/graphql/resolver/query.test.js' --timeout 10000 --reporter mochawesome",
+  "test-g-external": "mocha 'test/graphql/external/transferExternalGraphQl.test.js' --timeout 10000 --reporter mochawesome"
   }
 }

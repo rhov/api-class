@@ -1,7 +1,7 @@
 //Bibliotecas
 const request = require('supertest'); // Iniciando o supetest
 const { expect } = require('chai');
-const { apiURL } = require('../config/config');
+const { apiURLRest } = require('../../config/config');
 const { getToken } = require('../factory/superToken');
 let superToken;
 
@@ -13,7 +13,7 @@ describe('Transfer External', () => {
     describe('POST /transfers', () => {
         it('Quando informo remetente e destinatário inexistente recebo 400', async () => {
          
-            const resposta = await request(apiURL)
+            const resposta = await request(apiURLRest)
                 .post('/transfer')
                 .set('Authorization', `Bearer ${superToken}`)
                 .send({ // o send envia como se fosse o json
