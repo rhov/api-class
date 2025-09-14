@@ -1,6 +1,6 @@
 const request = require('supertest');
 const { expect } = require('chai');
-const { apiURLGraphql, userLogin } = require('../../config/config');
+const { apiURLGraphql } = require('../../config/config');
 const { getToken } = require('../factory/requisições/login/loginUser')
 const objetoCreate = require('../fixture/requisições/transfers/createTransfer.json');
 
@@ -31,7 +31,6 @@ describe('Transfers External GraphQL', () => {
 
 
     it('Transferência para não favorefcido acima de 5k', async () => {
-        console.log(createTransferMutation);
         createTransferMutation.variables.amount = 5000.01;
         createTransferMutation.variables.to = "sheldon";
         const respostaTransf = await request(apiURLGraphql)
