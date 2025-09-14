@@ -20,7 +20,7 @@ describe('Mutation', () => {
                         password: "123"
                     }
                 });
-            console.log(resposta.body);
+        //    console.log(resposta.body);
             console.log(resposta.status);
         });
 
@@ -36,7 +36,7 @@ describe('Mutation', () => {
                 
                         }`});
 
-            console.log(JSON.stringify(resposta.body, null, 2)); //Quando há objetos dentro de objetos precisa do stringfy
+        //    console.log(JSON.stringify(resposta.body, null, 2)); //Quando há objetos dentro de objetos precisa do stringfy
 
             console.log(resposta.status);
         })

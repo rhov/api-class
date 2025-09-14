@@ -20,7 +20,7 @@ describe('Query', () => {
                         }`});
 
                         
-            console.log(JSON.stringify(resposta.body, null, 2)); //Quando há objetos dentro de objetos precisa do stringfy
+       //     console.log(JSON.stringify(resposta.body, null, 2)); //Quando há objetos dentro de objetos precisa do stringfy
             console.log(resposta.status);
         }
         )
@@ -37,7 +37,7 @@ describe('Query', () => {
                 
                         }`});
 
-            console.log(JSON.stringify(resposta.body, null, 2)); //Quando há objetos dentro de objetos precisa do stringfy
+       //     console.log(JSON.stringify(resposta.body, null, 2)); //Quando há objetos dentro de objetos precisa do stringfy
 
             console.log(resposta.status);
         })
@@ -45,9 +45,3 @@ describe('Query', () => {
 }
 
 )
-/*
-curl --request POST \
-    --header 'content-type: application/json' \
-    --url http://localhost:4000/graphql \
-    --data '{"query":"query Users {\n  users {\n    username\n  }\n}"}'
-    */
