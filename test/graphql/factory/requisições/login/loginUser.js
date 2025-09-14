@@ -1,24 +1,25 @@
 const request = require('supertest');
-const { apiURLGraphql,userLogin } = require('../../../../config/config');
+const { userLogin } = require('../../../../config/config');
+require('dotenv').config();
 
 async function getToken() {
-    const resposta = await request(apiURLGraphql)
-            .post('')
-            .send({
-                query: `
+    const resposta = await request(process.env.BASE_URL_GRAPHQL)
+        .post('')
+        .send({
+            query: `
                     mutation Login($username: String!, $password: String!) {
                         login(username: $username, password: $password) {
                             token
                         }
                     }
                 `,
-                variables: {
-                    username: userLogin[1].username,
-                    password: userLogin[1].password
-                }
+            variables: {
+                username: userLogin[1].username,
+                password: userLogin[1].password
+            }
 
-            })
-        return resposta.body.data.login.token;
+        })
+    return resposta.body.data.login.token;
 }
 
 module.exports = { getToken };
