@@ -12,7 +12,7 @@ before(async () => { superToken = await getTokenGraphQL("apioff")
 */
 
 describe('Transfers External GraphQL', () => {
-    it.only('Obter Token', async () => {
+    it.only('Realizar Transferência com token obtido dinâmicamente', async () => {
         const resposta = await request(apiURL)
             .post('')
             .send({
@@ -29,9 +29,31 @@ describe('Transfers External GraphQL', () => {
                 }
 
             })
-        console.log(resposta.body.data.login.token);
+     
+        const respostaTransf = await request(apiURL)
+            .post('')
+            .set('Authorization', `Bearer ${resposta.body.data.login.token}`)
+            .send({
+                query: `
+                    mutation Mutation($from: String!, $to: String!, $amount: Float!) {
+                        transfer(from: $from, to: $to, amount: $amount) {
+                            from
+                            to
+                            amount
+                            
+                        }
+                    }
+                `,
+                variables: {
+                    from: "rodrigo",
+                    to: "aline",
+                    amount: 1000
+                }
+
+            })
+        console.log(respostaTransf.body);
     })
 
- 
+
 })
 
