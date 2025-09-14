@@ -2,13 +2,6 @@
 const request = require('supertest');
 const { apiURL, userLogin,apiURLGraphQL, ul } = require('../config/config');
 const app = require('../../../app');
-const appGraphQL = require ('../../../graphql/app');
-
-
-
-// ...existing code...
-// exports.getTokenGraphQL = async function(apiStart) { ... }
-
 
 async function getToken(apiStart) {
 
@@ -50,7 +43,7 @@ async function getTokenGraphQL(apiStart) {
     if (apiStartLower === undefined || apiStartLower === 'apion') {
         api = apiURLGraphQL;
     } else if (apiStartLower === 'apioff') {
-        api = appGraphQL;
+        api = await require('../../../graphql/app');
     } else {
         throw new Error('API não encontrada: use "apion" ou "apiOff"');
     }
@@ -58,7 +51,7 @@ async function getTokenGraphQL(apiStart) {
     let login;
     try {
         login = await request(api)
-            .post('')
+            .post('/graphql')
             .send({
                 query: `
                     mutation Login($username: String!, $password: String!) {
