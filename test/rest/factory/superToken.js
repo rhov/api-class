@@ -61,8 +61,8 @@ async function getTokenGraphQL(apiStart) {
                     }
                 `,
                 variables: {
-                    username: 'rodrigo',
-                    password: '123456'
+                    username: ul[0].username,
+                    password: ul[0].password
                 }
             });
        

@@ -5,7 +5,7 @@ const apiURL = "http://localhost:4000/graphql";
 const {getTokenGraphQL} = require ('../../rest/factory/superToken');
 let superToken;
 
-before(async () => { superToken = await getTokenGraphQL("apion") 
+before(async () => { superToken = await getTokenGraphQL("apioff") 
     console.log(superToken);
 });
 
