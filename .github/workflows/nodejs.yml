@@ -36,7 +36,7 @@ jobs:
     
     - name: Wait api
       run: sleep 5
-
+        
 
     - name: Run tests external #Realiza testes externos ou seja com API oN
       run: npm rum test-external 
