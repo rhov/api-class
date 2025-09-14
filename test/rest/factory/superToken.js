@@ -22,7 +22,7 @@ async function getToken(apiStart) {
     try {
         login = await request(api)
             .post('/login')
-            .send({ username: userLogin.username, password: userLogin.password });
+            .send({ username: userLogin[0].username, password: userLogin[0].password });
     } catch (err) {
     throw new Error(`Não foi possível conectar ao servidor. Verifique se a API ${apiURLRest} está online. Params: apiStart:${apiStart}`);
     }

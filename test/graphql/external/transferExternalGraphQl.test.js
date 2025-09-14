@@ -51,7 +51,7 @@ describe('Transfers External GraphQL', () => {
         expect(respostaTransf.status).to.equals(200);
     })
 
-     it.only('Transferência com saldo insuficiente', async () => {
+     it('Transferência com saldo insuficiente', async () => {
    
      
     const respostaTransf = await request(apiURLGraphql)
@@ -80,7 +80,7 @@ describe('Transfers External GraphQL', () => {
     })
 
 
- it.only('Transferência para não favorefcido acima de 5k', async () => {
+ it('Transferência para não favorefcido acima de 5k', async () => {
    
     const respostaTransf = await request(apiURLGraphql)
             .post('')
