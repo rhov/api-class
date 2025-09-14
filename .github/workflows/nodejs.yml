@@ -56,7 +56,7 @@ jobs:
 
 
     - name: Run ALL tests Graphql  #Realiza testes externos ou seja com API oN
-      run: nnpm run test-g   
+      run: npm run test-g   
 
     - name: Upload report ALL tests Graphql
       uses: actions/upload-artifact@v4
