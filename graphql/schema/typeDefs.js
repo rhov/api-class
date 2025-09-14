@@ -28,7 +28,7 @@ module.exports = gql`
 
   type Mutation {
     login(username: String!, password: String!): AuthPayload!
-    registerUser(username: String!, password: String!, favorecido: [String!]): User!
+    registerUser(username: String!, password: String!, favorecido: [String!], balance: Float): User!
     transfer(from: String!, to: String!, amount: Float!, data: String): Transfer!
   }
 `;

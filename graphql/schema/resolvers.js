@@ -14,8 +14,8 @@ const resolvers = {
       const token = jwt.sign({ username: user.username }, SECRET, { expiresIn: '1h' });
       return { user, token };
     },
-    registerUser: (_, { username, password, favorecido }) => {
-      return userService.registerUser({ username, password, favorecido });
+    registerUser: (_, { username, password, favorecido, balance }) => {
+      return userService.registerUser({ username, password, favorecido, balance });
     },
     transfer: (_, { from, to, amount, data }, context) => {
       if (!context.user) throw new Error('Autenticação necessária');

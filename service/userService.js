@@ -1,10 +1,10 @@
 const { users } = require('../model/userModel');
 
-function registerUser({ username, password, favorecido }) {
+function registerUser({ username, password, favorecido, balance = 0 }) {
   if (users.find(u => u.username === username)) {
     throw new Error('Usuário já existe');
   }
-  const user = { username, password, favorecido: Array.isArray(favorecido) ? favorecido : [] };
+  const user = { username, password, favorecido: Array.isArray(favorecido) ? favorecido : [], balance };
   users.push(user);
   return user;
 }
