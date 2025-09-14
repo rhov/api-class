@@ -31,12 +31,12 @@ jobs:
         name: mochawesome-report tests controller
         path: mochawesome-report/
 
-    - name: Start Api # Inicia a API
+    - name: Start Api Rest # Inicia a API
       run: npm start &
     
-    - name: Wait api
+    - name: Wait api rest
       run: sleep 5
-        
+
 
     - name: Run tests external #Realiza testes externos ou seja com API oN
       run: npm rum test-external 
@@ -45,5 +45,22 @@ jobs:
       uses: actions/upload-artifact@v4
       with:
         name: mochawesome-report tests external
+        path: mochawesome-report/
+
+
+    - name: Start Api Graphql # Inicia a API
+      run: npm run start-g &
+    
+    - name: Wait api Graphql
+      run: sleep 5
+
+
+    - name: Run ALL tests Graphql  #Realiza testes externos ou seja com API oN
+      run: nnpm run test-g   
+
+    - name: Upload report ALL tests Graphql
+      uses: actions/upload-artifact@v4
+      with:
+        name: mochawesome-report ALL tests Graphql
         path: mochawesome-report/
 
