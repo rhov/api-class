@@ -1,9 +1,9 @@
 //Bibliotecas
 const request = require('supertest'); // Iniciando o supetest
 const { expect } = require('chai');
-const { apiURL } = require('../config/config');
 const { getToken } = require('../factory/superToken');
 let superToken;
+require('dotenv').config();
 
 //pré-condição
 before(async () => {superToken = await getToken()});
@@ -13,19 +13,20 @@ describe('Transfer External', () => {
     describe('POST /transfers', () => {
         it('Quando informo remetente e destinatário inexistente recebo 400', async () => {
          
-            const resposta = await request(apiURL)
+            const resposta = await request(process.env.BASE_URL_REST)
                 .post('/transfer')
                 .set('Authorization', `Bearer ${superToken}`)
                 .send({ // o send envia como se fosse o json
                     from: "aline",
-                    to: "sheldon",
+                    to: "batman",
                     amount: 100
                 });// Vou usa o supertest apontando para o app
 
             expect(resposta.status).to.equals(400);
             expect(resposta.body).
-                to.have.property('error', 'Usuário remetente ou destinatário não encontrado');
+                to.have.property('error', 'Usuário remetente ou destinatário não encontrado.');
             // expect -> Espero a resposta
+
 
         });
     });

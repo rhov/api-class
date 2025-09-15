@@ -1,15 +1,15 @@
 //Bibliotecas
 const request = require('supertest');
-const { apiURL, userLogin } = require('../config/config');
+const user = require('../../helpers/login/users.json');
 const app = require('../../../app');
-
+require('dotenv').config();
 
 async function getToken(apiStart) {
 
     let api;
     const apiStartLower = typeof apiStart === 'string' ? apiStart.toLowerCase() : apiStart;
     if (apiStartLower === undefined || apiStartLower === 'apion') {
-        api = apiURL;
+    api = process.env.BASE_URL_REST;
     } else if (apiStartLower === 'apioff') {
         api = app;
     } else {
@@ -22,9 +22,9 @@ async function getToken(apiStart) {
     try {
         login = await request(api)
             .post('/login')
-            .send({ username: userLogin.username, password: userLogin.password });
+            .send({ username: user.username, password: user.password });
     } catch (err) {
-        throw new Error(`Não foi possível conectar ao servidor. Verifique se a API ${apiURL} está online. Params: apiStart:${apiStart}`);
+    throw new Error(`Não foi possível conectar ao servidor. Verifique se a API ${process.env.BASE_URL_REST} está online. Params: apiStart:${apiStart}`);
     }
 
     if (login.status != 200) {

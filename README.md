@@ -1,16 +1,115 @@
 
+
 # API de Transferências
+
+Projeto criado na aula de automação de testes de API REST e GraphQL.
 
 Esta API permite realizar operações de login, registro de usuários, consulta de usuários e transferências de valores, com regras básicas de negócio. Agora disponível via REST e GraphQL.
 
 ## Funcionalidades
-- **Registro de usuário**: Não permite usuários duplicados.
-- **Login**: Requer usuário e senha.
-- **Consulta de usuários**: Lista todos os usuários cadastrados.
-- **Transferências**: Só permite transferências acima de R$ 5.000,00 para usuários marcados como "favorecido".
-- **Swagger**: Documentação interativa disponível em `/api-docs`.
-- **GraphQL**: Interface disponível em `/graphql`.
 
+---
+
+## 🚀 Instruções de Ambiente (.env)
+
+Crie um arquivo `.env` na raiz do projeto com as variáveis abaixo (sem aspas, ponto e vírgula ou espaços extras):
+
+```env
+BASE_URL_GRAPHQL=http://localhost:4000/graphql
+BASE_URL_REST=http://localhost:3000
+JWT_SECRET=supersecret
+```
+
+Veja o exemplo em `.env.example`.
+
+---
+
+## 📦 Bibliotecas Utilizadas
+
+**Principais:**
+- **express**: Framework para APIs REST.
+- **apollo-server-express**: Integração GraphQL com Express.
+- **graphql**: Core da API GraphQL.
+- **jsonwebtoken**: Geração e validação de tokens JWT.
+- **swagger-ui-express**: Documentação interativa Swagger.
+- **dotenv**: Carrega variáveis de ambiente do arquivo `.env`.
+
+**Testes:**
+- **mocha**: Framework de testes.
+- **chai**: Biblioteca de asserções.
+- **chai-exclude**: Permite comparar objetos ignorando propriedades.
+- **supertest**: Testes de endpoints HTTP.
+- **sinon**: Mocks e spies para testes.
+- **mochawesome**: Relatórios de testes em HTML/JSON.
+
+**Dev:**
+- **nodemon**: Reinicia o servidor automaticamente em desenvolvimento.
+
+---
+
+## 🏗️ Padrões de Projeto & Frameworks
+
+
+- **MVC (Model-View-Controller)**: Separação entre dados (`model/`), regras de negócio (`service/`), e rotas/controllers (`controller/`).
+- **Middleware**: Autenticação JWT implementada como middleware para REST e GraphQL.
+- **GraphQL**: Estrutura modular com `typeDefs` e `resolvers`.
+- **Modularização**: Código organizado em módulos para facilitar manutenção e reuso.
+- **Factory**: Funções factory para geração dinâmica de dados e tokens em testes.
+- **Fixture**: Uso de fixtures para dados estáticos e cenários de teste previsíveis.
+- **Testes Automatizados**: Estrutura de testes REST e GraphQL, uso de mocks, factories e fixtures.
+- **Documentação Swagger**: Disponível em `/api-docs` para facilitar integração e testes.
+
+---
+
+## ✨ Exemplos de Uso
+
+### Registro de Usuário
+```json
+POST /register
+{
+  "username": "aline",
+  "password": "123456",
+  "favorecido": ["rodrigo"]
+}
+```
+
+### Login
+```json
+POST /login
+{
+  "username": "aline",
+  "password": "123456"
+}
+```
+
+### Transferência (REST)
+```json
+POST /transfer
+{
+  "from": "aline",
+  "to": "rodrigo",
+  "amount": 100.00
+}
+```
+
+### Transferência (GraphQL)
+```graphql
+mutation {
+  transfer(from: "aline", to: "rodrigo", amount: 100.00) {
+    from
+    to
+    amount
+    date
+  }
+}
+```
+
+---
+
+## 📝 Observações
+
+- Sempre mantenha o arquivo `.env` sem aspas, ponto e vírgula ou espaços extras.
+- Para rodar os testes, utilize os scripts do `package.json`.
 ## Estrutura de diretórios
 - `controller/`: Lógica dos endpoints REST
 - `service/`: Regras de negócio
