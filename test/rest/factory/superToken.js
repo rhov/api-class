@@ -1,6 +1,6 @@
 //Bibliotecas
 const request = require('supertest');
-const user = require('../fixture/login/users.json');
+const user = require('../../helpers/login/users.json');
 const app = require('../../../app');
 require('dotenv').config();
 

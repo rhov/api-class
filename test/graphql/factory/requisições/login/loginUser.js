@@ -1,5 +1,5 @@
 const request = require('supertest');
-const { userLogin } = require('../../../../config/config');
+const userLogin = require('../../../../helpers/login/users.json');
 require('dotenv').config();
 
 async function getToken() {
@@ -14,8 +14,8 @@ async function getToken() {
                     }
                 `,
             variables: {
-                username: userLogin[1].username,
-                password: userLogin[1].password
+                username: userLogin.username,
+                password: userLogin.password
             }
 
         })
