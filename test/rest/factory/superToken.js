@@ -1,6 +1,6 @@
 //Bibliotecas
 const request = require('supertest');
-const { userLogin } = require('../../config/config');
+const user = require('../fixture/login/users.json');
 const app = require('../../../app');
 require('dotenv').config();
 
@@ -22,7 +22,7 @@ async function getToken(apiStart) {
     try {
         login = await request(api)
             .post('/login')
-            .send({ username: userLogin[0].username, password: userLogin[0].password });
+            .send({ username: user.username, password: user.password });
     } catch (err) {
     throw new Error(`Não foi possível conectar ao servidor. Verifique se a API ${process.env.BASE_URL_REST} está online. Params: apiStart:${apiStart}`);
     }
