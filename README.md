@@ -1,5 +1,8 @@
 
+
 # API de Transferências
+
+Projeto criado na aula de automação de testes de API REST e GraphQL.
 
 Esta API permite realizar operações de login, registro de usuários, consulta de usuários e transferências de valores, com regras básicas de negócio. Agora disponível via REST e GraphQL.
 
