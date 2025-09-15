@@ -14,8 +14,8 @@ function transfer({ from, to, amount, data = 'transferência realizada com suces
   if (amount > 5000 && !(Array.isArray(sender.favorecido) && sender.favorecido.includes(to))) {
     throw new Error('Transferências acima de R$ 5.000,00 só podem ser feitas para favorecidos do remetente.');
   }
-  sender.balance -= amount;
-  recipient.balance += amount;
+ // sender.balance -= amount;
+ // recipient.balance += amount;
   const transferObj = { from, to, amount, data, date: new Date().toISOString() };
   transfers.push(transferObj);
   return transferObj;

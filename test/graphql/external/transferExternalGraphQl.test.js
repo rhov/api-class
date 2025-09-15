@@ -17,7 +17,7 @@ describe('Transfers External GraphQL', () => {
 
     })
 
-    it.only('Realizar Transferência válida', async () => {
+    it('Realizar Transferência válida', async () => {
         const respostaEsperada = require('../fixture/respostas/realizarTransfereciaValida.json');
         const respostaTransf = await request(process.env.BASE_URL_GRAPHQL)
             .post('')
@@ -29,17 +29,18 @@ describe('Transfers External GraphQL', () => {
             .to.deep.equal(respostaEsperada.data.transfer);
     })
 
-    it('Transferência com saldo insuficiente', async () => {
-        createTransferMutation.variables.amount = 9999999;
+    const testTransfErrors = require('../fixture/requisições/transfers/createTransferWithErrors.json');
+    testTransfErrors.forEach(teste => {
+    it(`Regra de negócio: ${teste.testCase}`, async () => {
         const respostaTransf = await request(process.env.BASE_URL_GRAPHQL)
             .post('')
             .set('Authorization', `Bearer ${token}`)
-            .send(createTransferMutation);
+            .send(teste.createTransfer);
 
-        expect(respostaTransf.body.errors[0].message).to.equals("Saldo insuficiente para realizar a transferência.");
+        expect(respostaTransf.body.errors[0].message).to.equals(teste.messageExpect);
     })
-
-
+})
+/*
     it('Transferência para não favorefcido acima de 5k', async () => {
         createTransferMutation.variables.amount = 5000.01;
         createTransferMutation.variables.to = "sheldon";
@@ -47,9 +48,10 @@ describe('Transfers External GraphQL', () => {
             .post('')
             .set('Authorization', `Bearer ${token}`)
             .send(createTransferMutation);
-         expect(respostaTransf.body.errors[0].message).to.equals("Transferências acima de R$ 5.000,00 só podem ser feitas para favorecidos do remetente.");
+         expect(respostaTransf.body.errors[0].message).
+         to.equals("Transferências acima de R$ 5.000,00 só podem ser feitas para favorecidos do remetente.");
     })
-
+*/
 });
 
 
